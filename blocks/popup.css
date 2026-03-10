@@ -124,17 +124,17 @@
   margin: 0;
 }
 
-.popup_input-error {
-  border: #ff0000;
+.popup__input-error {
+  border-bottom: 1px solid #ff0000;
 }
 
-.popup_input-error-message {
+.popup__input-error-message {
   display: none;
   font-size: 12px;
   color: #ff0000;
 }
 
-.popup_input-error-message_active {
+.popup__input-error-message_active {
   display: block;
 }
 

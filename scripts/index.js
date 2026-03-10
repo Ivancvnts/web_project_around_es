@@ -67,21 +67,20 @@ function openModal(modal) {
 
 function closeModal(modal) {
   modal.classList.remove("popup_is-opened");
-  resetValidation(modal.querySelector(`.popup__form`));
 }
 
 function showInputError(form, element, errorMessage) {
   const errorMessageEl = form.querySelector(`.${element.id}-input-error`);
   errorMessageEl.textContent = errorMessage;
-  errorMessageEl.classList.add("popup_input-error-message_active");
-  element.classList.add("popup_input-error");
+  errorMessageEl.classList.add("popup__input-error-message_active");
+  element.classList.add("popup__input-error");
 }
 
 function hideInputError(form, element) {
   const errorMessageEl = form.querySelector(`.${element.id}-input-error`);
   errorMessageEl.textContent = "";
-  errorMessageEl.classList.remove("popup_input-error-message_active");
-  element.classList.remove("popup_input-error");
+  errorMessageEl.classList.remove("popup__input-error-message_active");
+  element.classList.remove("popup__input-error");
 }
 
 function validateForm(form) {
@@ -101,16 +100,6 @@ function validateForm(form) {
         (input) => input.validity.valid,
       );
       submitButton.disabled = !allValid;
-    });
-  });
-}
-
-function resetValidation(form) {
-  const inputs = form.querySelectorAll(".popup__input");
-
-  inputs.forEach((input) => {
-    input.addEventListener("input", () => {
-      hideInputError(form, input);
     });
   });
 }
