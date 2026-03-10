@@ -68,20 +68,41 @@
             type="button"
           ></button>
           <h3 class="popup__title">Editar perfil</h3>
-          <form class="popup__form" id="edit-profile-form">
+          <form class="popup__form" id="edit-profile-form" novalidate>
             <input
               class="popup__input popup__input_type_name"
-              name="name"
-              placeholder="Nombre"
               type="text"
+              minlength="2"
+              maxlength="40"
+              required
+              placeholder="Nombre"
+              name="name"
+              id="name"
             />
+            <span class="name-input-error popup_input-error-message"
+              >Por favor, rellena este campo</span
+            >
             <input
               class="popup__input popup__input_type_description"
-              name="description"
+              type="textarea"
+              minlength="2"
+              maxlength="200"
+              required
               placeholder="Acerca de mí"
-              type="text"
+              name="description"
+              id="description"
             />
-            <button class="button popup__button" type="submit">Guardar</button>
+            <span class="description-input-error popup_input-error-message"
+              >Por favor, rellena este campo</span
+            >
+            <button
+              class="button popup__button"
+              type="submit"
+              name="submitButton"
+              disabled
+            >
+              Guardar
+            </button>
           </form>
         </div>
       </div>
@@ -96,19 +117,36 @@
           <form class="popup__form" id="new-card-form">
             <input
               class="popup__input popup__input_type_card-name"
-              name="place-name"
+              type="text"
+              minlength="2"
+              maxlength="30"
               placeholder="Título"
               required
-              type="text"
+              name="place-name"
+              id="place-name"
             />
+            <span class="place-name-input-error popup_input-error-message"
+              >Por favor, rellena este campo</span
+            >
             <input
               class="popup__input popup__input_type_url"
-              name="link"
+              type="url"
               placeholder="Enlace a la imagen"
               required
-              type="url"
+              name="link"
+              id="link"
             />
-            <button class="button popup__button" type="submit">Crear</button>
+            <span class="link-input-error popup_input-error-message"
+              >Por favor, introduce una direccion web</span
+            >
+            <button
+              class="button popup__button"
+              type="submit"
+              name="submitButton"
+              disabled
+            >
+              Crear
+            </button>
           </form>
         </div>
       </div>

@@ -45,10 +45,74 @@ initialCards.forEach((card) => {
 // Functions to open and close modals/Popups
 function openModal(modal) {
   modal.classList.add("popup_is-opened");
+
+  const form = modal.querySelector(".popup__form");
+  validateForm(form);
+
+  modal.addEventListener("click", (event) => {
+    const isOutsidePopUp = event.target.id === modal.id;
+
+    if (isOutsidePopUp) {
+      closeModal(modal);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeModal(modal);
+      console.log("se presiono esc");
+    }
+  });
 }
 
 function closeModal(modal) {
   modal.classList.remove("popup_is-opened");
+  resetValidation(modal.querySelector(`.popup__form`));
+}
+
+function showInputError(form, element, errorMessage) {
+  const errorMessageEl = form.querySelector(`.${element.id}-input-error`);
+  errorMessageEl.textContent = errorMessage;
+  errorMessageEl.classList.add("popup_input-error-message_active");
+  element.classList.add("popup_input-error");
+}
+
+function hideInputError(form, element) {
+  const errorMessageEl = form.querySelector(`.${element.id}-input-error`);
+  errorMessageEl.textContent = "";
+  errorMessageEl.classList.remove("popup_input-error-message_active");
+  element.classList.remove("popup_input-error");
+}
+
+function validateForm(form) {
+  const inputs = form.querySelectorAll(".popup__input");
+
+  inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      if (!input.validity.valid) {
+        showInputError(form, input, input.validationMessage);
+      } else {
+        hideInputError(form, input);
+      }
+
+      const submitButton = form.elements.submitButton;
+
+      const allValid = Array.from(inputs).every(
+        (input) => input.validity.valid,
+      );
+      submitButton.disabled = !allValid;
+    });
+  });
+}
+
+function resetValidation(form) {
+  const inputs = form.querySelectorAll(".popup__input");
+
+  inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      hideInputError(form, input);
+    });
+  });
 }
 
 //--------------------PROFILE-----------------------
@@ -66,6 +130,10 @@ function fillProfileForm() {
   //Set input values to current profile data
   nameInput.value = profileTitleEl.textContent;
   descriptionInput.value = profileDescriptionEl.textContent;
+
+  //Activate submitButton
+  const submitButton = editProfilePopup.querySelector(".popup__button");
+  submitButton.disabled = false;
 }
 
 //Handle opening edit profile popup
@@ -107,9 +175,8 @@ function getCardElement(title, imageLink) {
   const cardTitle = cardElement.querySelector(".card__title");
   const cardImage = cardElement.querySelector(".card__image");
 
-  cardTitle.textContent = title && title.trim() !== "" ? title : "Sin Titulo";
-  cardImage.src =
-    imageLink && imageLink.trim() ? imageLink : "../images/placeholder.jpg";
+  cardTitle.textContent = title;
+  cardImage.src = imageLink;
 
   const likeBtn = cardElement.querySelector(".card__like-button");
   likeBtn.addEventListener("click", () => {
