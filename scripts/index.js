@@ -59,7 +59,7 @@ const closeImagePopup = imagePopup.querySelector(".popup__close");
 
 initialCards.forEach((data) => {
   const newCard = new Card(data, "#card-template", handleOpenImagePopup);
-  renderCard(newCard.GetCardElement(), cardContainer);
+  renderCard(newCard, cardContainer);
 });
 
 //--------------------PROFILE-----------------------
@@ -115,7 +115,7 @@ function handleProfileFormSubmit(event) {
 //------------------CARDS------------------------
 
 function renderCard(card, container) {
-  container.append(card);
+  container.append(card.GetCardElement());
 }
 
 function handleCardFormSubmit(event) {
@@ -124,10 +124,13 @@ function handleCardFormSubmit(event) {
   const nameInput = addCardForm.querySelector(".popup__input_type_card-name");
   const linkInput = addCardForm.querySelector(".popup__input_type_url");
 
-  const name = nameInput.value;
-  const link = linkInput.value;
+  const data = {
+    name: nameInput.value,
+    link: linkInput.value,
+  };
 
-  renderCard(name, link, cardContainer);
+  const newCard = new Card(data, "#card-template", handleOpenImagePopup);
+  renderCard(newCard, cardContainer);
 }
 
 function handleOpenImagePopup(title, imageLink) {
