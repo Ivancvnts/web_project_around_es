@@ -1,5 +1,3 @@
-import { openModal } from "./Utils.js";
-
 export class Card {
   #title;
   #imageLink;
