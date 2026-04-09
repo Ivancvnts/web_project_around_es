@@ -21,7 +21,6 @@ export default class Popup {
     this.#_element.addEventListener("mousedown", (event) => {
       if (event.target === this.#_element) {
         this.close();
-        console.log("ola");
       }
     });
   }
