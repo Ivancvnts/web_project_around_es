@@ -18,7 +18,13 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img class="profile__image" src="./images/avatar.jpg" alt="Avatar" />
+          <div class="profile__image-container">
+            <img
+              class="profile__image"
+              src="./images/avatar.jpg"
+              alt="Avatar"
+            />
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
@@ -159,6 +165,40 @@
           ></button>
           <img alt="" class="popup__image" src="#" />
           <p class="popup__caption"></p>
+        </div>
+      </div>
+      <div class="popup" id="confirmation-popup">
+        <div class="popup__content">
+          <p class="popup__title">¿Estás seguro?</p>
+          <button class="popup__button">Sí</button>
+          <button
+            aria-label="Cerrar ventana emergente"
+            class="popup__close"
+            type="button"
+          ></button>
+        </div>
+      </div>
+      <div class="popup" id="avatar-popup">
+        <div class="popup__content">
+          <p class="popup__title">Cambiar foto de perfil</p>
+          <button
+            aria-label="Cerrar ventana emergente"
+            class="popup__close"
+            type="button"
+          ></button>
+          <form class="popup__form" id="edit-avatar-form">
+            <input
+              class="popup__input popup__input-type-avatar"
+              type="text"
+              required
+              name="avatar"
+              id="avatar"
+            />
+            <span class="avatar-input-error popup__input-error-message"
+              >Por favor, rellena este campo</span
+            >
+            <button class="popup__button">Guardar</button>
+          </form>
         </div>
       </div>
     </div>

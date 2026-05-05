@@ -31,11 +31,24 @@ export default class PopupWithForm extends Popup {
       .querySelector(this.#_popupSelector)
       .querySelector(".popup__form");
 
+    const submitButton = document
+      .querySelector(this.#_popupSelector)
+      .querySelector(".popup__button");
+
     popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       const inputValues = this.#_getInputValues();
-      this.#_onSubmit(inputValues);
-      this.close();
+      submitButton.textContent = "Guardando...";
+      this.#_onSubmit(inputValues)
+        .then(() => {
+          this.close();
+        })
+        .catch((err) => {
+          console.log(`Error: ${err}`);
+        })
+        .finally(() => {
+          submitButton.textContent = "Guardar";
+        });
     });
   }
 
